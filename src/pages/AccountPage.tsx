@@ -182,7 +182,7 @@ export default function AccountPage() {
                 <button
                   onClick={() => {
                     if (errorCount === 0) return
-                    if (confirm(`确定清除 ${errorCount} 条发布失败的任务吗？\n清除后，对应评论会重新出现在「评论生成」页，可以再次加入发布队列。`)) clearErrorTasks()
+                    if (confirm(`确定清除 ${errorCount} 条发布失败的任务吗？\n对应视频及评论也会被删除，清除后无法恢复。`)) clearErrorTasks()
                   }}
                   disabled={errorCount === 0}
                   className="px-4 py-2 border border-orange-200 text-orange-600 rounded-lg text-sm hover:bg-orange-50 disabled:opacity-40 disabled:cursor-not-allowed"

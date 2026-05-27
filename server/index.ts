@@ -261,10 +261,34 @@ app.delete('/api/tasks/:id', (req, res) => {
 })
 
 app.delete('/api/tasks', (req, res) => {
-  // Optional ?status=error or ?status=completed to clear specific status
   const { status } = req.query
-  let result
-  if (status) {
+  let result: { changes: number }
+  if (status === 'error') {
+    // When clearing error tasks, also delete videos that are now orphaned
+    // (i.e., videos that had error tasks and have NO remaining pending/completed tasks).
+    // Videos with other non-error tasks are kept — only the error tasks are removed.
+    const tx = db.transaction(() => {
+      const errorVideos = db
+        .prepare("SELECT DISTINCT video_id FROM publish_tasks WHERE status = 'error'")
+        .all() as Array<{ video_id: string }>
+
+      const taskResult = db.prepare("DELETE FROM publish_tasks WHERE status = 'error'").run()
+
+      for (const { video_id } of errorVideos) {
+        const remaining = db
+          .prepare("SELECT COUNT(*) as c FROM publish_tasks WHERE video_id = ?")
+          .get(video_id) as { c: number }
+        if (remaining.c === 0) {
+          // No remaining tasks → safe to delete video and its generated comments
+          db.prepare('DELETE FROM generated_comments WHERE video_id = ?').run(video_id)
+          db.prepare('DELETE FROM videos WHERE id = ?').run(video_id)
+        }
+      }
+
+      return taskResult.changes
+    })
+    result = { changes: tx() }
+  } else if (status) {
     result = db.prepare('DELETE FROM publish_tasks WHERE status = ?').run(status as string)
   } else {
     result = db.prepare('DELETE FROM publish_tasks').run()

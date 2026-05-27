@@ -604,11 +604,11 @@ export const useStore = create<Store>((set, get) => ({
   clearErrorTasks: async () => {
     try {
       await api.clearTasks('error')
-      // After dropping error tasks, their generated_comments are no longer
-      // referenced by any publish_task, so the affected (video, comment) pairs
-      // become visible again on the comment-generation page automatically —
-      // see GET /api/comments filter in server/index.ts.
+      // Also reload videos and comments — error tasks whose videos had no other
+      // remaining tasks are now deleted from the videos table as well.
       await get().loadTasks()
+      await get().loadExistingVideos()
+      await get().loadExistingComments()
     } catch (err) {
       console.error('Clear error tasks error:', err)
     }
