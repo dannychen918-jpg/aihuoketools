@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(sleep 3 && cat /c/Users/外星人/AppData/Local/Temp/claude/C--Users-----Desktop-AIhuoketools/375768cb-47ab-4b70-9f4b-1488fcc21145/tasks/bln92bpg6.output)",
+      "Skill(browse)",
+      "Skill(browse:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -s http://localhost:3001/api/videos)",
+      "Bash(curl -s http://localhost:3001/api/accounts)",
+      "Bash(curl -s \"http://localhost:3001/api/videos?platforms=douyin,kuaishou,xiaohongshu&keyword=%E7%9B%B4%E6%92%AD%E8%BF%90%E8%90%A5&minLikes=1000&sortBy=recent\")",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(len\\(data\\), 'videos'\\)\")",
+      "Bash(pkill -f \"tsx server/index.ts\")",
+      "Bash(npx tsx *)",
+      "Bash(curl -s -X POST https://zenmux.ai/api/anthropic/v1/messages -H 'Content-Type: application/json' -H 'x-api-key: sk-ai-v1-879424ecd258de2eccd031d19e2a59f42a4c8f0158f47ed744a05f97582c7461' -H 'anthropic-version: 2023-06-01' -d '{\"model\":\"claude-sonnet-4-6\",\"max_tokens\":100,\"messages\":[{\"role\":\"user\",\"content\":\"say hi\"}]}')",
+      "Bash(pkill -f \"tsx server\")",
+      "Bash(curl -s -X POST http://localhost:3001/api/comments/generate -H \"Content-Type: application/json\" -d '{\"videos\":[{\"id\":\"v2\",\"title\":\"测试\",\"platform\":\"douyin\"}],\"style\":\"resonance\"}')",
+      "Read(//tmp/**)",
+      "Bash(curl -s -X POST http://localhost:3001/api/comments/generate -H 'Content-Type: application/json' -d '{\"videos\":[{\"id\":\"v2\",\"title\":\"直播间数据差不一定是流量问题\",\"platform\":\"douyin\"}],\"style\":\"resonance\"}')",
+      "Bash(pkill -f \"tsx server\" 2>/dev/null; sleep 1 *)",
+      "Bash(curl -s -X POST http://localhost:3001/api/comments/generate -H 'Content-Type: application/json' -d '{\"videos\":[{\"id\":\"v2\",\"title\":\"直播间数据差\",\"platform\":\"douyin\"}],\"style\":\"resonance\"}')",
+      "Bash(curl -s http://localhost:3001/api/test-ai)",
+      "Bash(pkill -f \"tsx\")",
+      "Bash(pkill -f \"node.*server\")",
+      "Bash(taskkill //F //IM node.exe)",
+      "Bash(curl -s --max-time 30 -X POST http://localhost:3001/api/comments/generate -H 'Content-Type: application/json' -d '{\"videos\":[{\"id\":\"v2\",\"title\":\"直播间数据差不一定是流量问题\",\"platform\":\"douyin\"}],\"style\":\"resonance\"}')",
+      "Bash(npm run *)"
+    ]
+  }
+}
